@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Details</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<style>
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 20px;
+}
+
+.transaction-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.transaction {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transaction.failed {
+  border-color: #f44336;
+}
+
+.transaction-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.icon.green {
+  background-color: #4caf50;
+}
+
+.icon.blue {
+  background-color: #1e88e5;
+}
+
+.details {
+  flex-grow: 1;
+  margin-left: 15px;
+}
+
+.title {
+  margin: 0;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.name {
+  margin: 5px 0;
+  font-weight: bold;
+  color: #212529;
+}
+
+.time {
+  margin: 0;
+  color: #6c757d;
+  font-size: 12px;
+}
+
+.amount {
+  font-size: 16px;
+  font-weight: bold;
+  color: #212529;
+}
+
+.method {
+  margin: 10px 0 0;
+  color: #6c757d;
+  font-size: 12px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  color: #f44336;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.error-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f44336;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+
+</style>
+  <div class="transaction-container">
+    <!-- First Transaction -->
+    <div class="transaction">
+      <div class="transaction-details">
+        <div class="icon green">RR</div>
+        <div class="details">
+          <p class="title">Paid to</p>
+          <p class="name">Rahul Rahul</p>
+          <p class="time">1 day ago</p>
+        </div>
+        <div class="amount">₹10</div>
+      </div>
+      <p class="method">Debited from <b>UPI Lite</b></p>
+    </div>
+
+    <!-- Second Transaction -->
+    <div class="transaction failed">
+      <div class="transaction-details">
+        <div class="icon blue"><i>⬤</i></div>
+        <div class="details">
+          <p class="title">Transfer to</p>
+          <p class="name">XXXXXX6990</p>
+          <p class="time">25 Nov 2024</p>
+        </div>
+        <div class="amount">₹22</div>
+      </div>
+      <div class="status">
+        <span>Failed</span>
+        <div class="error-icon">!</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

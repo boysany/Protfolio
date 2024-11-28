@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Background Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #2d2b55, #1a1936); /* Gradient background */
+        }
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="backgroundCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('backgroundCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size to window size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Define floating shapes
+        const shapes = [];
+        const colors = ['#ff00ff', '#00ff99', '#ffcc00', '#00ffff', '#ff6600']; // Bright 3D-like colors
+
+        // Generate random shapes
+        function createShapes() {
+            for (let i = 0; i < 10; i++) {
+                shapes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 100 + 50,
+                    dx: Math.random() * 1.5 - 0.75, // Horizontal speed
+                    dy: Math.random() * 1.5 - 0.75, // Vertical speed
+                    rotation: Math.random() * Math.PI * 2,
+                    rotationSpeed: Math.random() * 0.01 - 0.005,
+                    color: colors[Math.floor(Math.random() * colors.length)]
+                });
+            }
+        }
+
+        // Draw a floating shape
+        function drawShape(shape) {
+            ctx.save();
+            ctx.translate(shape.x, shape.y);
+            ctx.rotate(shape.rotation);
+
+            ctx.beginPath();
+            ctx.arc(0, 0, shape.size / 2, 0, Math.PI * 2);
+            ctx.fillStyle = shape.color;
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = shape.color;
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.restore();
+        }
+
+        // Update shapes' positions
+        function updateShapes() {
+            shapes.forEach(shape => {
+                shape.x += shape.dx;
+                shape.y += shape.dy;
+                shape.rotation += shape.rotationSpeed;
+
+                // Wrap shapes around edges of the screen
+                if (shape.x > canvas.width) shape.x = 0;
+                if (shape.x < 0) shape.x = canvas.width;
+                if (shape.y > canvas.height) shape.y = 0;
+                if (shape.y < 0) shape.y = canvas.height;
+            });
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+            shapes.forEach(drawShape); // Draw all shapes
+            updateShapes(); // Update positions
+
+            requestAnimationFrame(animate); // Repeat animation
+        }
+
+        // Adjust canvas size on window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Initialize and start the animation
+        createShapes();
+        animate();
+    </script>
+</body>
+</html>
